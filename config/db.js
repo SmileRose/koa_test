@@ -1,4 +1,5 @@
 const mysql = require('mysql')
+
 const pool = mysql.createPool({
     "host": "127.0.0.1",
     "port": 3306,
@@ -7,7 +8,7 @@ const pool = mysql.createPool({
     "database": "phpcmsv9"
 })//数据库连接配置
 
-const query = (sql,callback)=>{
+var query = (sql,callback)=>{
     return new Promise((resolve, reject)=>{
         pool.getConnection(function(err,connection){
             if(err){

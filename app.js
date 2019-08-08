@@ -12,6 +12,10 @@ app.use(cors()) //跨域
 const index = require('./routes/index')
 const users = require('./routes/users')
 
+var bodyParser = require('koa-bodyparser');
+
+app.use(bodyParser());
+
 // error handler
 onerror(app)
 
