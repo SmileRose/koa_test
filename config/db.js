@@ -14,7 +14,7 @@ var query = (sql,callback)=>{
             if(err){
                 reject(err)
             }else{
-                connection.query(sql, val, (err,rows)=> {
+                connection.query(sql, (err,rows)=> {
                     if(err){
                         reject(err)
                     }else{
