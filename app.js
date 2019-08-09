@@ -7,14 +7,14 @@ const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 
 const cors = require('koa-cors')
-app.use(cors()) //跨域
+app.use(cors())
 
 const index = require('./routes/index')
 const users = require('./routes/users')
 
-var bodyParser = require('koa-bodyparser');
-
-app.use(bodyParser());
+const koaBody = require('koa-body')({
+  multipart: true
+});
 
 // error handler
 onerror(app)
