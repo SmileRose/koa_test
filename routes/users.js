@@ -2,15 +2,7 @@ const router = require('koa-router')()
 const db = require("../config/db");
 router.prefix('/users')
 
-router
-  .param('users', (page, pagesize,ctx, next) => {
-  console.log(page, pagesize)
-  
-    ctx.user = users[id];
-    if (!ctx.user) return ctx.status = 404;
-    return next();
-  })
-  
+
 
 router.all('users/:page/:pagesize', async (ctx, next) => {
 console.log(ctx)
