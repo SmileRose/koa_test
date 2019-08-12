@@ -9,8 +9,10 @@ const logger = require('koa-logger')
 const cors = require('koa-cors')
 app.use(cors())
 
-const index = require('./routes/index')
-const users = require('./routes/users')
+// const index = require('./routes/index')
+// const users = require('./routes/users')
+
+
 
 const koaBody = require('koa-body')({
   multipart: true
@@ -39,9 +41,34 @@ app.use(async (ctx, next) => {
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
 
+//routes
+
+// 文章
+    const art_select = require('./routes/article/art_select')
+    app.use(art_select.routes(), art_select.allowedMethods())
+    //add
+    const art_add = require('./routes/article/art_add')
+    app.use(art_add.routes(), art_add.allowedMethods())
+    //update
+    const art_update = require('./routes/article/art_update')
+    app.use(art_update.routes(), art_update.allowedMethods())
+    //ÆÀÂÛ
+    const art_comment = require('./routes/article/art_comment')
+    app.use(art_comment.routes(), art_comment.allowedMethods())
+
+
+
+    //文件
+    const menu_image = require('./routes/webset/menu_image')
+    app.use(menu_image.routes(), menu_image.allowedMethods())
+
+    const menu_category = require('./routes/webset/menu_category')
+    app.use(menu_category.routes(), menu_category.allowedMethods())
+
+
 // routes
-app.use(index.routes(), index.allowedMethods())
-app.use(users.routes(), users.allowedMethods())
+// app.use(index.routes(), index.allowedMethods())
+// app.use(users.routes(), users.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {

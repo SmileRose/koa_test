@@ -1,30 +1,30 @@
-var express = require('express');
-var router = express.Router();
+const router = require('koa-router')()
+const db = require("../../config/db");
 
-var db = require("../config/db");
-const Unity = require('../unity/unity');//Unity为一个工具类
-
-const r = Unity.send;
+router.prefix('/article_update')
 
 /**
  * search
  */
-router.get('/', function(req, res, next) {
-	var id = req.body.id;
-	var catid = req.body.catid;
-	var title = req.body.title;
-	var keywords = req.body.keywords;
-	var description = req.body.description;
-	var thumb = req.body.thumb;
-	var content = req.body.content;
+ router.post('/', async (ctx, next) => {
+	var id = ctx.request.body.id;
+	var catid = ctx.request.body.catid;
+	var title = ctx.request.body.title;
+	var keywords = ctx.request.body.keywords;
+	var description = ctx.request.body.description;
+	var thumb = ctx.request.body.thumb;
+	var content = ctx.request.body.content;
 
 	var sql = "UPDATE v9_news SET catid =" + catid + ",title = " + title + ",keywords = " +keywords + ",description = " + description + ",content = " +content + " WHERE id = " + id;
-    db.query(sql,function (error, rows) {
-        if (error) {
-            res.send(r('', 200, 1, 'error'));
-        } else {
-            res.send(r(rows));
-        }
-    })
+
+    var tmp = await db.query(sql).then(function(result) {
+        return result;
+    }, function(error){
+        return -1;
+    });
+    ctx.body = {
+        data: tmp,
+        flag: true
+    };
 });
 module.exports = router;//不加这句会报错： Router.use() requires a middleware function but got a Object （没有向外暴露，导致app.use引用不到）

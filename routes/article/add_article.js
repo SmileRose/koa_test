@@ -1,10 +1,10 @@
-const express = require('express');
-const router = express.Router();
-const db = require("../config/db");
-const Unity = require('../unity/unity'); //Unity为一个工具类
-const r = Unity.send;
+const router = require('koa-router')()
+const db = require("../../config/db");
 
-router.post('/', function(req, res, next) {
+
+router.prefix('/add_article')
+
+router.post('/', async (ctx, next) => {
 
 
     var catid = req.body.catid;
@@ -15,16 +15,16 @@ router.post('/', function(req, res, next) {
     var updatetime = Math.round(new Date().getTime()/1000);
     var id = req.body.id;
     var sql = '';
-    
+
      if(id){
       sql = 'UPDATE v9_news SET catid ="' + catid + '",title ="' + title + '",keywords ="' + keywords + '",updatetime =' + updatetime + ',description ="' + description + '" WHERE id = '+ id;
-     
+
      }else{
        sql = 'INSERT INTO v9_news (catid, title,keywords,inputtime, updatetime,description,status) VALUES ("' + catid + '", "' + title + '","' + keywords + '","' + inputtime + '","' + updatetime + '","' + description + '", 99)';
      }
 
 
-    
+
     console.log(sql);
 
     db.query(sql, function(error, rows) {

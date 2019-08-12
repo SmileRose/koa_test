@@ -1,8 +1,7 @@
 const router = require('koa-router')()
 const db = require("../../config/db");
 
-router.prefix('/menu_image')
-
+router.prefix('/menu_category')
 
 /**
  * search
@@ -10,7 +9,7 @@ router.prefix('/menu_image')
 router.post('/', async(ctx, next) => {
 
 
-    var sql = "SELECT * FROM v9_attachment ORDER BY listorder DESC";
+    var sql = "SELECT * FROM v9_category ORDER BY listorder ASC";
     var tmp = await db.query(sql).then(function(result) {
         return result;
     }, function(error) {
@@ -21,4 +20,4 @@ router.post('/', async(ctx, next) => {
         flag: true
     };
 });
-module.exports = router; //不加这句会报错： Router.use() requires a middleware function but got a Object （没有向外暴露，导致app.use引用不到）
+module.exports = router;
