@@ -1,17 +1,18 @@
 var express = require('express');
 var router = express.Router();
+
 var db = require("../config/db");
 const Unity = require('../unity/unity');//Unity为一个工具类
+
 const r = Unity.send;
+
 /**
  * search
  */
 router.post('/', function(req, res, next) {
- 
-    
-    var sql = 'SELECT * FROM v9_category ORDER BY catid ASC';   
-    console.log(sql)
 
+
+	var sql = "SELECT * FROM v9_attachment ORDER BY aid DESC";
     db.query(sql,function (error, rows) {
         if (error) {
             res.send(r('', 200, 1, 'error'));
