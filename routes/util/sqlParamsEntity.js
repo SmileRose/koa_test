@@ -1,21 +1,13 @@
-var mysql = require('mysql');
+const mysql = require('mysql')
 var async = require("async");
 
 module.exports = {
     execTrans: execTrans,
 }
 
-var pool = mysql.createPool({
-    host: "mysql host",
-    user: "mysql login user",
-    password: "mysql login pwd",
-    database: "target db name",
-    connectionLimit: 10,
-    port: "mysql db port",
-    waitForConnections: false
-});
 
-function execTrans(sqlparamsEntities, callback) {
+
+var execTrans = (sqlparamsEntities, callback) => {
     pool.getConnection(function (err, connection) {
         if (err) {
             return callback(err, null);
@@ -72,3 +64,6 @@ function execTrans(sqlparamsEntities, callback) {
         });
     });
 }
+// exports.execTrans = execTrans;
+
+module.exports = execTrans;
