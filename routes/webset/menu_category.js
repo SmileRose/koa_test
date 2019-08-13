@@ -17,7 +17,7 @@ router.post('/', async(ctx, next) => {
     });
     ctx.body = {
         data: tmp,
-        flag: true
+        flag: tmp == -1 ? false: true
     };
 });
 module.exports = router;

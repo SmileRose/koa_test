@@ -8,7 +8,7 @@ router.post('/', async (ctx, next) => {
     let pagesize =  ctx.request.body.pagesize;
 
     let count = ( page - 1 )* pagesize;
-    var sql = 'SELECT * FROM v9_news ORDER BY id desc limit ' + count + ','+ pagesize;
+    var sql = 'SELECT * FROM v9_news ORDER BY id DESC LIMIT ' + count + ','+ pagesize;
     var tmp = await db.query(sql).then(function(result) {
         return result;
     }, function(error){
@@ -16,7 +16,7 @@ router.post('/', async (ctx, next) => {
     });
     ctx.body = {
         data: tmp,
-        flag: true
+        flag: tmp == -1 ? false: true
     };
 })
 
