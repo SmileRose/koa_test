@@ -66,6 +66,15 @@ app.use(async (ctx, next) => {
     app.use(menu_category.routes(), menu_category.allowedMethods())
 
 
+    //小程序
+    const more_punch = require('./routes/minipro/more_punch')
+    app.use(more_punch.routes(), more_punch.allowedMethods())
+
+
+    const comment = require('./routes/minipro/comment')
+    app.use(comment.routes(), comment.allowedMethods())
+
+
 // routes
 // app.use(index.routes(), index.allowedMethods())
 // app.use(users.routes(), users.allowedMethods())

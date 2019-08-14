@@ -1,6 +1,7 @@
 const router = require('koa-router')()
-const db = require("../config/db");
-router.prefix('/comment')
+const db = require("../../config/db");
+
+router.prefix('/more_punch')
 
 router.post('/', async (ctx, next) => {
 
@@ -9,7 +10,7 @@ router.post('/', async (ctx, next) => {
 
     let count = ( page - 1 )* pagesize;
 	
-    var sql = 'SELECT * FROM v9_wxcomment ORDER BY id desc limit ' + count + ','+ pagesize;
+    var sql = 'SELECT * FROM v9_pinch ORDER BY id desc limit ' + count + ','+ pagesize;
     var tmp = await db.query(sql).then(function(result) {
         return result;
     }, function(error){
@@ -17,7 +18,7 @@ router.post('/', async (ctx, next) => {
     });
     ctx.body = {
         data: tmp,
-        flag: true
+        flag: tmp == -1 ? false : true
     };
 })
 
