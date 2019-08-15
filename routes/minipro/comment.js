@@ -1,5 +1,6 @@
 const router = require('koa-router')()
-const db = require("../config/db");
+const db = require("../../config/db");
+
 router.prefix('/comment')
 
 router.post('/', async (ctx, next) => {
