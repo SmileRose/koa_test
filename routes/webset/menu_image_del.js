@@ -6,7 +6,7 @@ router.prefix('/menu_image_del')
  */
 router.post('/', async(ctx, next) => {
     let aid =  ctx.request.body.aid;
-    var sql = 'DELETE FROM v9_attachment WHERE aid in (' + aid +')';
+    var sql = 'DELETE FROM v9_attachment WHERE aid IN (' + aid +')';
     var tmp = await db.query(sql).then(function(result) {
         return result;
     }, function(error) {
