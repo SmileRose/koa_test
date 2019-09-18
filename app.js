@@ -7,7 +7,10 @@ const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 
 const cors = require('koa-cors')
-app.use(cors())
+app.use(cors());
+
+var grobal = {};
+
 
 // const index = require('./routes/index')
 // const users = require('./routes/users')
@@ -40,6 +43,11 @@ app.use(async (ctx, next) => {
     const ms = new Date() - start
     console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
+
+
+
+
+
 
 //routes
 
@@ -78,6 +86,18 @@ app.use(more_punch.routes(), more_punch.allowedMethods())
 
 const comment = require('./routes/minipro/comment')
 app.use(comment.routes(), comment.allowedMethods())
+
+
+//template
+ const template = require('./routes/minipro/template')
+ app.use(template.routes(), template.allowedMethods())
+
+
+
+//template
+const login = require('./routes/minipro/login')
+app.use(login.routes(), login.allowedMethods())
+
 
 
 // routes
